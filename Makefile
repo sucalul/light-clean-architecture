@@ -9,4 +9,4 @@ exec:
 	docker-compose exec api sh
 
 exec-db:
-	docker-compose exec db bash -c "psql -U postgres"
+	docker-compose exec db sh -c "psql -U postgres"

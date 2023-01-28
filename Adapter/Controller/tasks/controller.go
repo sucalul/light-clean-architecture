@@ -9,15 +9,12 @@ import (
 	interactor "github.com/yuya0729/light-clean-architecture/Usecase/Interactor"
 )
 
-// TODO:
-// interface導入？
+// TODO: interface導入？
 
-// TODO:
-// controllerでやっているバリデーションを各層に分散
+// TODO: controllerでやっているバリデーションを各層に分散
 // ref: https://qiita.com/nakaakist/items/11195ac5290450fbc9f9
 
-// TODO:
-// errorの体系化
+// TODO: errorの体系化
 
 func GetTasks(w http.ResponseWriter, r *http.Request) {
 	code := 200
