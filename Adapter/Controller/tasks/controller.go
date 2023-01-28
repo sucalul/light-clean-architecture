@@ -5,8 +5,8 @@ import (
 	"strconv"
 
 	"github.com/labstack/echo/v4"
-	myerror "github.com/yuya0729/light-clean-architecture/cmd/app/Driver/error"
-	interactor "github.com/yuya0729/light-clean-architecture/cmd/app/Usecase/Interactor"
+	myerror "github.com/yuya0729/light-clean-architecture/Driver/error"
+	interactor "github.com/yuya0729/light-clean-architecture/Usecase/Interactor"
 )
 
 // TODO:

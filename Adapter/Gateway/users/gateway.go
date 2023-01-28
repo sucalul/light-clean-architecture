@@ -5,8 +5,8 @@ import (
 	"log"
 
 	"github.com/labstack/echo/v4"
-	myerror "github.com/yuya0729/light-clean-architecture/cmd/app/Driver/error"
-	entity "github.com/yuya0729/light-clean-architecture/cmd/app/Entity"
+	myerror "github.com/yuya0729/light-clean-architecture/Driver/error"
+	entity "github.com/yuya0729/light-clean-architecture/Entity"
 )
 
 func GetUsers(c echo.Context, DB *sql.DB) ([]*entity.User, error) {

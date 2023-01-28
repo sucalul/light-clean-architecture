@@ -2,8 +2,8 @@ package controller
 
 import (
 	"github.com/labstack/echo/v4"
-	tasks "github.com/yuya0729/light-clean-architecture/cmd/app/Adapter/Controller/tasks"
-	users "github.com/yuya0729/light-clean-architecture/cmd/app/Adapter/Controller/users"
+	tasks "github.com/yuya0729/light-clean-architecture/Adapter/Controller/tasks"
+	users "github.com/yuya0729/light-clean-architecture/Adapter/Controller/users"
 )
 
 // driverで定義されたエンドポイントの関数を定義する

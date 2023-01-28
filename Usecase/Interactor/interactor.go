@@ -2,11 +2,11 @@ package interactor
 
 import (
 	"github.com/labstack/echo/v4"
-	myerror "github.com/yuya0729/light-clean-architecture/cmd/app/Driver/error"
-	entity "github.com/yuya0729/light-clean-architecture/cmd/app/Entity"
+	myerror "github.com/yuya0729/light-clean-architecture/Driver/error"
+	entity "github.com/yuya0729/light-clean-architecture/Entity"
 
-	tasks "github.com/yuya0729/light-clean-architecture/cmd/app/Usecase/Interactor/tasks"
-	users "github.com/yuya0729/light-clean-architecture/cmd/app/Usecase/Interactor/users"
+	tasks "github.com/yuya0729/light-clean-architecture/Usecase/Interactor/tasks"
+	users "github.com/yuya0729/light-clean-architecture/Usecase/Interactor/users"
 )
 
 // controllerから関数を呼び出す

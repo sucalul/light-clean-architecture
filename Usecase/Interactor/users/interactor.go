@@ -2,9 +2,9 @@ package users
 
 import (
 	"github.com/labstack/echo/v4"
-	gateway "github.com/yuya0729/light-clean-architecture/cmd/app/Adapter/Gateway"
-	myerror "github.com/yuya0729/light-clean-architecture/cmd/app/Driver/error"
-	entity "github.com/yuya0729/light-clean-architecture/cmd/app/Entity"
+	gateway "github.com/yuya0729/light-clean-architecture/Adapter/Gateway"
+	myerror "github.com/yuya0729/light-clean-architecture/Driver/error"
+	entity "github.com/yuya0729/light-clean-architecture/Entity"
 )
 
 // controllerから関数を呼び出す

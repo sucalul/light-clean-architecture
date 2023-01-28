@@ -5,8 +5,8 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	controller "github.com/yuya0729/light-clean-architecture/cmd/app/Adapter/Controller"
-	gateway "github.com/yuya0729/light-clean-architecture/cmd/app/Adapter/Gateway"
+	controller "github.com/yuya0729/light-clean-architecture/Adapter/Controller"
+	gateway "github.com/yuya0729/light-clean-architecture/Adapter/Gateway"
 )
 
 // routerとかdb接続とか

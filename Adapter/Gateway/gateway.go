@@ -6,11 +6,11 @@ import (
 	_ "github.com/lib/pq"
 
 	"github.com/labstack/echo/v4"
-	myerror "github.com/yuya0729/light-clean-architecture/cmd/app/Driver/error"
-	entity "github.com/yuya0729/light-clean-architecture/cmd/app/Entity"
+	myerror "github.com/yuya0729/light-clean-architecture/Driver/error"
+	entity "github.com/yuya0729/light-clean-architecture/Entity"
 
-	tasks "github.com/yuya0729/light-clean-architecture/cmd/app/Adapter/Gateway/tasks"
-	users "github.com/yuya0729/light-clean-architecture/cmd/app/Adapter/Gateway/users"
+	tasks "github.com/yuya0729/light-clean-architecture/Adapter/Gateway/tasks"
+	users "github.com/yuya0729/light-clean-architecture/Adapter/Gateway/users"
 )
 
 var DB *sql.DB
