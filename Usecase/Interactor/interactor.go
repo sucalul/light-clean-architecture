@@ -3,7 +3,6 @@ package interactor
 import (
 	"net/http"
 
-	"github.com/labstack/echo/v4"
 	myerror "github.com/yuya0729/light-clean-architecture/Driver/error"
 	entity "github.com/yuya0729/light-clean-architecture/Entity"
 
@@ -48,6 +47,6 @@ func IsExistsTask(userID int, taskID int) *myerror.MyError {
 	return tasks.IsExistsTask(userID, taskID)
 }
 
-func DeleteTask(c echo.Context, userID int, taskID int) *myerror.MyError {
-	return tasks.DeleteTask(c, userID, taskID)
+func DeleteTask(userID int, taskID int) *myerror.MyError {
+	return tasks.DeleteTask(userID, taskID)
 }

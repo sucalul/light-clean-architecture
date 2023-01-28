@@ -3,7 +3,6 @@ package controller
 import (
 	"net/http"
 
-	"github.com/labstack/echo/v4"
 	tasks "github.com/yuya0729/light-clean-architecture/Adapter/Controller/tasks"
 	users "github.com/yuya0729/light-clean-architecture/Adapter/Controller/users"
 )
@@ -32,6 +31,6 @@ func UpdateTask(w http.ResponseWriter, r *http.Request) {
 	tasks.UpdateTask(w, r)
 }
 
-func DeleteTask(c echo.Context) error {
-	return tasks.DeleteTask(c)
+func DeleteTask(w http.ResponseWriter, r *http.Request) {
+	tasks.DeleteTask(w, r)
 }

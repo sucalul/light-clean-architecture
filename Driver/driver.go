@@ -36,6 +36,7 @@ func Serve() {
 		r.Get("/tasks", controller.GetTasks)
 		r.Post("/tasks", controller.CreateTask)
 		r.Put("/tasks/{taskID}", controller.UpdateTask)
+		r.Delete("/tasks/{taskID}", controller.DeleteTask)
 	})
 	http.ListenAndServe(":8080", r)
 }

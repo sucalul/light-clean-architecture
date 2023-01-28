@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"log"
 
-	"github.com/labstack/echo/v4"
 	myerror "github.com/yuya0729/light-clean-architecture/Driver/error"
 	entity "github.com/yuya0729/light-clean-architecture/Entity"
 )
@@ -78,7 +77,7 @@ func UpdateTask(DB *sql.DB, userID int, title string, taskID int) *myerror.MyErr
 	return nil
 }
 
-func DeleteTask(c echo.Context, DB *sql.DB, userID int, taskID int) *myerror.MyError {
+func DeleteTask(DB *sql.DB, userID int, taskID int) *myerror.MyError {
 	del, err := DB.Prepare("DELETE FROM tasks WHERE id = $1 AND user_id = $2")
 	if err != nil {
 		log.Println(err)

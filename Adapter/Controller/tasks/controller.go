@@ -6,8 +6,6 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/labstack/echo/v4"
-	myerror "github.com/yuya0729/light-clean-architecture/Driver/error"
 	interactor "github.com/yuya0729/light-clean-architecture/Usecase/Interactor"
 )
 
@@ -112,28 +110,36 @@ func UpdateTask(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write(buf)
 }
 
-func DeleteTask(c echo.Context) error {
-	taskID, e := strconv.Atoi(c.Param("id"))
+func DeleteTask(w http.ResponseWriter, r *http.Request) {
+	code := 200
+	taskID, e := strconv.Atoi(chi.URLParam(r, "taskID"))
 	if e != nil {
-		msg := myerror.New(400, e.Error())
-		return c.JSON(http.StatusBadRequest, msg)
+		code = 400
 	}
-	userID, e := strconv.Atoi(c.QueryParam("user_id"))
+	userID, e := strconv.Atoi(chi.URLParam(r, "user_id"))
 	if e != nil {
-		msg := myerror.New(400, e.Error())
-		return c.JSON(http.StatusBadRequest, msg)
+		code = 400
 	}
 	if err := interactor.IsExistsTask(userID, taskID); err != nil {
 		switch err.Code {
 		case 404:
-			return c.JSON(http.StatusNotFound, err)
+			code = 404
 		}
 	}
-	if err := interactor.DeleteTask(c, userID, taskID); err != nil {
+	if err := interactor.DeleteTask(userID, taskID); err != nil {
 		switch err.Code {
 		case 404:
-			return c.JSON(http.StatusNotFound, err)
+			code = 404
 		}
 	}
-	return c.JSON(http.StatusOK, `{"message": "ok"}`)
+	// レスポンスヘッダーの設定
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+
+	// ステータスコードを設定
+	w.WriteHeader(code)
+
+	// httpResponseの内容を書き込む
+	// TODO: responseちゃんと返す
+	buf, _ := json.MarshalIndent("", "", "    ")
+	_, _ = w.Write(buf)
 }

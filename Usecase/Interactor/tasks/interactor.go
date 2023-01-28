@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/labstack/echo/v4"
 	gateway "github.com/yuya0729/light-clean-architecture/Adapter/Gateway"
 	myerror "github.com/yuya0729/light-clean-architecture/Driver/error"
 	entity "github.com/yuya0729/light-clean-architecture/Entity"
@@ -52,8 +51,8 @@ func UpdateTask(userID int, title string, taskID int) *myerror.MyError {
 	return nil
 }
 
-func DeleteTask(c echo.Context, userID int, taskID int) *myerror.MyError {
-	if err := gateway.DeleteTask(c, userID, taskID); err != nil {
+func DeleteTask(userID int, taskID int) *myerror.MyError {
+	if err := gateway.DeleteTask(userID, taskID); err != nil {
 		return err
 	}
 	return nil
