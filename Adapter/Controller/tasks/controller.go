@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/go-chi/chi/v5"
 	"github.com/labstack/echo/v4"
 	myerror "github.com/yuya0729/light-clean-architecture/Driver/error"
 	interactor "github.com/yuya0729/light-clean-architecture/Usecase/Interactor"
@@ -41,55 +42,74 @@ func GetTasks(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write(buf)
 }
 
-func CreateTask(c echo.Context) error {
-	task, err := interactor.BindCreateUpdateTask(c)
+func CreateTask(w http.ResponseWriter, r *http.Request) {
+	code := 200
+	task, err := interactor.BindCreateUpdateTask(r)
 	if err != nil {
 		switch err.Code {
 		case 400:
-			return c.JSON(http.StatusBadRequest, err)
+			code = 400
 		}
 	}
 	if err := interactor.IsExistsUser(task.UserID); err != nil {
 		switch err.Code {
 		case 404:
-			return c.JSON(http.StatusNotFound, err)
+			code = 404
 		}
 	}
-	if err = interactor.CreateTask(c, task.UserID, task.Title); err != nil {
+	if err = interactor.CreateTask(task.UserID, task.Title); err != nil {
 		switch err.Code {
 		case 404:
-			return c.JSON(http.StatusNotFound, err)
+			code = 404
 		}
 	}
-	return c.JSON(http.StatusOK, `{"code": 200, "message": "ok"}`)
+	// レスポンスヘッダーの設定
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+
+	// ステータスコードを設定
+	w.WriteHeader(code)
+
+	// httpResponseの内容を書き込む
+	// TODO: responseちゃんと返す
+	buf, _ := json.MarshalIndent("", "", "    ")
+	_, _ = w.Write(buf)
 }
 
-func UpdateTask(c echo.Context) error {
-	taskID, e := strconv.Atoi(c.Param("id"))
+func UpdateTask(w http.ResponseWriter, r *http.Request) {
+	code := 200
+	taskID, e := strconv.Atoi(chi.URLParam(r, "taskID"))
 	if e != nil {
-		msg := myerror.New(400, e.Error())
-		return c.JSON(http.StatusBadRequest, msg)
+		code = 400
 	}
-	task, err := interactor.BindCreateUpdateTask(c)
+	task, err := interactor.BindCreateUpdateTask(r)
 	if err != nil {
 		switch err.Code {
 		case 400:
-			return c.JSON(http.StatusBadRequest, err)
+			code = 400
 		}
 	}
-	if err = interactor.IsExistsTask(c, task.UserID, taskID); err != nil {
+	if err = interactor.IsExistsTask(task.UserID, taskID); err != nil {
 		switch err.Code {
 		case 404:
-			return c.JSON(http.StatusNotFound, err)
+			code = 404
 		}
 	}
-	if err = interactor.UpdateTask(c, task.UserID, task.Title, taskID); err != nil {
+	if err = interactor.UpdateTask(task.UserID, task.Title, taskID); err != nil {
 		switch err.Code {
 		case 404:
-			return c.JSON(http.StatusNotFound, err)
+			code = 404
 		}
 	}
-	return c.JSON(http.StatusOK, `{"code": 200, "message": "ok"}`)
+	// レスポンスヘッダーの設定
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+
+	// ステータスコードを設定
+	w.WriteHeader(code)
+
+	// httpResponseの内容を書き込む
+	// TODO: responseちゃんと返す
+	buf, _ := json.MarshalIndent("", "", "    ")
+	_, _ = w.Write(buf)
 }
 
 func DeleteTask(c echo.Context) error {
@@ -103,7 +123,7 @@ func DeleteTask(c echo.Context) error {
 		msg := myerror.New(400, e.Error())
 		return c.JSON(http.StatusBadRequest, msg)
 	}
-	if err := interactor.IsExistsTask(c, userID, taskID); err != nil {
+	if err := interactor.IsExistsTask(userID, taskID); err != nil {
 		switch err.Code {
 		case 404:
 			return c.JSON(http.StatusNotFound, err)

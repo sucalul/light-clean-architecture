@@ -24,8 +24,6 @@ func Serve() {
 	gateway.DB = DB
 
 	// APIルーティング
-	// api.POST("/tasks", controller.CreateTask)
-	// api.PUT("/tasks/:id", controller.UpdateTask)
 	// api.DELETE("/tasks/:id", controller.DeleteTask)
 	// create user
 
@@ -36,6 +34,8 @@ func Serve() {
 		r.Get("/users", controller.GetUsers)
 		r.Get("/users/{userID}", controller.GetUser)
 		r.Get("/tasks", controller.GetTasks)
+		r.Post("/tasks", controller.CreateTask)
+		r.Put("/tasks/{taskID}", controller.UpdateTask)
 	})
 	http.ListenAndServe(":8080", r)
 }

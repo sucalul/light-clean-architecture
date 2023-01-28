@@ -24,12 +24,12 @@ func GetTasks(w http.ResponseWriter, r *http.Request) {
 	tasks.GetTasks(w, r)
 }
 
-func CreateTask(c echo.Context) error {
-	return tasks.CreateTask(c)
+func CreateTask(w http.ResponseWriter, r *http.Request) {
+	tasks.CreateTask(w, r)
 }
 
-func UpdateTask(c echo.Context) error {
-	return tasks.UpdateTask(c)
+func UpdateTask(w http.ResponseWriter, r *http.Request) {
+	tasks.UpdateTask(w, r)
 }
 
 func DeleteTask(c echo.Context) error {

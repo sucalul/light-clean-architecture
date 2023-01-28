@@ -1,6 +1,8 @@
 package interactor
 
 import (
+	"net/http"
+
 	"github.com/labstack/echo/v4"
 	myerror "github.com/yuya0729/light-clean-architecture/Driver/error"
 	entity "github.com/yuya0729/light-clean-architecture/Entity"
@@ -30,20 +32,20 @@ func GetTasks() ([]*entity.Task, *myerror.MyError) {
 	return tasks.GetTasks()
 }
 
-func BindCreateUpdateTask(c echo.Context) (*entity.CreateTask, *myerror.MyError) {
-	return tasks.BindCreateUpdateTask(c)
+func BindCreateUpdateTask(r *http.Request) (*entity.CreateTask, *myerror.MyError) {
+	return tasks.BindCreateUpdateTask(r)
 }
 
-func CreateTask(c echo.Context, userID int, title string) *myerror.MyError {
-	return tasks.CreateTask(c, userID, title)
+func CreateTask(userID int, title string) *myerror.MyError {
+	return tasks.CreateTask(userID, title)
 }
 
-func UpdateTask(c echo.Context, userID int, title string, taskID int) *myerror.MyError {
-	return tasks.UpdateTask(c, userID, title, taskID)
+func UpdateTask(userID int, title string, taskID int) *myerror.MyError {
+	return tasks.UpdateTask(userID, title, taskID)
 }
 
-func IsExistsTask(c echo.Context, userID int, taskID int) *myerror.MyError {
-	return tasks.IsExistsTask(c, userID, taskID)
+func IsExistsTask(userID int, taskID int) *myerror.MyError {
+	return tasks.IsExistsTask(userID, taskID)
 }
 
 func DeleteTask(c echo.Context, userID int, taskID int) *myerror.MyError {
