@@ -14,8 +14,8 @@ import (
 // service的な役割
 // interfaceがあっても良い
 
-func GetUsers(c echo.Context) ([]*entity.User, error) {
-	return users.GetUsers(c)
+func GetUsers() ([]*entity.User, error) {
+	return users.GetUsers()
 }
 
 func GetUser(c echo.Context, userID int) (*entity.User, error) {

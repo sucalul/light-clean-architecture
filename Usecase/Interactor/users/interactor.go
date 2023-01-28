@@ -13,8 +13,8 @@ import (
 // interfaceがあっても良い
 // memo
 
-func GetUsers(c echo.Context) ([]*entity.User, error) {
-	u, err := gateway.GetUsers(c)
+func GetUsers() ([]*entity.User, error) {
+	u, err := gateway.GetUsers()
 	if err != nil {
 		return nil, err
 	}

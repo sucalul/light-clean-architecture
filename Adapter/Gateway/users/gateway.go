@@ -9,7 +9,7 @@ import (
 	entity "github.com/yuya0729/light-clean-architecture/Entity"
 )
 
-func GetUsers(c echo.Context, DB *sql.DB) ([]*entity.User, error) {
+func GetUsers(DB *sql.DB) ([]*entity.User, error) {
 	user := entity.User{}
 	users := []*entity.User{}
 	rows, err := DB.Query("SELECT id, name FROM users")

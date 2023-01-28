@@ -20,8 +20,8 @@ var DB *sql.DB
 // entityに渡す
 
 // users
-func GetUsers(c echo.Context) ([]*entity.User, error) {
-	return users.GetUsers(c, DB)
+func GetUsers() ([]*entity.User, error) {
+	return users.GetUsers(DB)
 }
 
 func GetUser(c echo.Context, userID int) (*entity.User, *myerror.MyError) {

@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"net/http"
+
 	"github.com/labstack/echo/v4"
 	tasks "github.com/yuya0729/light-clean-architecture/Adapter/Controller/tasks"
 	users "github.com/yuya0729/light-clean-architecture/Adapter/Controller/users"
@@ -9,8 +11,8 @@ import (
 // driverで定義されたエンドポイントの関数を定義する
 
 // users
-func GetUsers(c echo.Context) error {
-	return users.GetUsers(c)
+func GetUsers(w http.ResponseWriter, r *http.Request) {
+	users.GetUsers(w, r)
 }
 
 func GetUser(c echo.Context) error {
