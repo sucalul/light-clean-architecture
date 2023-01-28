@@ -10,6 +10,3 @@ exec:
 
 exec-db:
 	docker-compose exec db bash -c "psql -U postgres"
-
-down:
-	docker-compose down
