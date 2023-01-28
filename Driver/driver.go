@@ -2,19 +2,17 @@ package driver
 
 import (
 	"database/sql"
+	"net/http"
 
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
+
 	controller "github.com/yuya0729/light-clean-architecture/Adapter/Controller"
 	gateway "github.com/yuya0729/light-clean-architecture/Adapter/Gateway"
 )
 
 // routerとかdb接続とか
 func Serve() {
-	e := echo.New()
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-
 	// db接続
 	var err error
 	dsn := "user=postgres host=postgres port=5432 dbname=postgres password=postgres sslmode=disable"
@@ -25,15 +23,16 @@ func Serve() {
 	// gateway DBにDBを渡す
 	gateway.DB = DB
 
-	// APIルーティング
-	api := e.Group("/api")
-	api.GET("/users", controller.GetUsers)
-	api.GET("/users/:id", controller.GetUser)
-	api.GET("/tasks", controller.GetTasks)
-	api.POST("/tasks", controller.CreateTask)
-	api.PUT("/tasks/:id", controller.UpdateTask)
-	api.DELETE("/tasks/:id", controller.DeleteTask)
-	// create user
+	r := chi.NewRouter()
+	r.Use(middleware.Logger)
 
-	e.Start(":8080")
+	r.Route("/api", func(r chi.Router) {
+		r.Get("/users", controller.GetUsers)
+		r.Get("/users/{userID}", controller.GetUser)
+		r.Get("/tasks", controller.GetTasks)
+		r.Post("/tasks", controller.CreateTask)
+		r.Put("/tasks/{taskID}", controller.UpdateTask)
+		r.Delete("/tasks/{taskID}", controller.DeleteTask)
+	})
+	http.ListenAndServe(":8080", r)
 }

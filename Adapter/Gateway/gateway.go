@@ -5,7 +5,6 @@ import (
 
 	_ "github.com/lib/pq"
 
-	"github.com/labstack/echo/v4"
 	myerror "github.com/yuya0729/light-clean-architecture/Driver/error"
 	entity "github.com/yuya0729/light-clean-architecture/Entity"
 
@@ -20,31 +19,31 @@ var DB *sql.DB
 // entityに渡す
 
 // users
-func GetUsers(c echo.Context) ([]*entity.User, error) {
-	return users.GetUsers(c, DB)
+func GetUsers() ([]*entity.User, error) {
+	return users.GetUsers(DB)
 }
 
-func GetUser(c echo.Context, userID int) (*entity.User, *myerror.MyError) {
-	return users.GetUser(c, DB, userID)
+func GetUser(userID int) (*entity.User, *myerror.MyError) {
+	return users.GetUser(DB, userID)
 }
 
 // tasks
-func GetTasks(c echo.Context) ([]*entity.Task, *myerror.MyError) {
-	return tasks.GetTasks(c, DB)
+func GetTasks() ([]*entity.Task, *myerror.MyError) {
+	return tasks.GetTasks(DB)
 }
 
-func GetTask(c echo.Context, userID int, taskID int) (*entity.Task, *myerror.MyError) {
-	return tasks.GetTask(c, DB, userID, taskID)
+func GetTask(userID int, taskID int) (*entity.Task, *myerror.MyError) {
+	return tasks.GetTask(DB, userID, taskID)
 }
 
-func CreateTask(c echo.Context, userID int, title string) *myerror.MyError {
-	return tasks.CreateTask(c, DB, userID, title)
+func CreateTask(userID int, title string) *myerror.MyError {
+	return tasks.CreateTask(DB, userID, title)
 }
 
-func UpdateTask(c echo.Context, userID int, title string, taskID int) *myerror.MyError {
-	return tasks.UpdateTask(c, DB, userID, title, taskID)
+func UpdateTask(userID int, title string, taskID int) *myerror.MyError {
+	return tasks.UpdateTask(DB, userID, title, taskID)
 }
 
-func DeleteTask(c echo.Context, userID int, taskID int) *myerror.MyError {
-	return tasks.DeleteTask(c, DB, userID, taskID)
+func DeleteTask(userID int, taskID int) *myerror.MyError {
+	return tasks.DeleteTask(DB, userID, taskID)
 }

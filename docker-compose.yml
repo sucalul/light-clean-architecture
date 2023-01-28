@@ -7,7 +7,7 @@ services:
       dockerfile: ./build/Dockerfile
     command: "air -c ./build/.air.toml"
     ports:
-      - "8080:8080"
+      - "8888:8080"
     volumes:
       - ./:/app/go/base
     tty: true

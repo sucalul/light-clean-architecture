@@ -1,7 +1,8 @@
 package controller
 
 import (
-	"github.com/labstack/echo/v4"
+	"net/http"
+
 	tasks "github.com/yuya0729/light-clean-architecture/Adapter/Controller/tasks"
 	users "github.com/yuya0729/light-clean-architecture/Adapter/Controller/users"
 )
@@ -9,27 +10,27 @@ import (
 // driverで定義されたエンドポイントの関数を定義する
 
 // users
-func GetUsers(c echo.Context) error {
-	return users.GetUsers(c)
+func GetUsers(w http.ResponseWriter, r *http.Request) {
+	users.GetUsers(w, r)
 }
 
-func GetUser(c echo.Context) error {
-	return users.GetUser(c)
+func GetUser(w http.ResponseWriter, r *http.Request) {
+	users.GetUser(w, r)
 }
 
 // tasks
-func GetTasks(c echo.Context) error {
-	return tasks.GetTasks(c)
+func GetTasks(w http.ResponseWriter, r *http.Request) {
+	tasks.GetTasks(w, r)
 }
 
-func CreateTask(c echo.Context) error {
-	return tasks.CreateTask(c)
+func CreateTask(w http.ResponseWriter, r *http.Request) {
+	tasks.CreateTask(w, r)
 }
 
-func UpdateTask(c echo.Context) error {
-	return tasks.UpdateTask(c)
+func UpdateTask(w http.ResponseWriter, r *http.Request) {
+	tasks.UpdateTask(w, r)
 }
 
-func DeleteTask(c echo.Context) error {
-	return tasks.DeleteTask(c)
+func DeleteTask(w http.ResponseWriter, r *http.Request) {
+	tasks.DeleteTask(w, r)
 }

@@ -1,7 +1,9 @@
 package tasks
 
 import (
-	"github.com/labstack/echo/v4"
+	"encoding/json"
+	"net/http"
+
 	gateway "github.com/yuya0729/light-clean-architecture/Adapter/Gateway"
 	myerror "github.com/yuya0729/light-clean-architecture/Driver/error"
 	entity "github.com/yuya0729/light-clean-architecture/Entity"
@@ -12,45 +14,45 @@ import (
 // service的な役割
 // interfaceがあっても良い
 
-func GetTasks(c echo.Context) ([]*entity.Task, *myerror.MyError) {
-	t, err := gateway.GetTasks(c)
+func GetTasks() ([]*entity.Task, *myerror.MyError) {
+	t, err := gateway.GetTasks()
 	if err != nil {
 		return nil, err
 	}
 	return t, nil
 }
 
-func BindCreateUpdateTask(c echo.Context) (*entity.CreateTask, *myerror.MyError) {
+func BindCreateUpdateTask(r *http.Request) (*entity.CreateTask, *myerror.MyError) {
 	task := entity.CreateTask{}
-	if err := c.Bind(&task); err != nil {
+	if err := json.NewDecoder(r.Body).Decode(&task); err != nil {
 		return nil, myerror.New(400, err.Error())
 	}
 	return &task, nil
 }
 
-func IsExistsTask(c echo.Context, userID int, taskID int) *myerror.MyError {
-	if _, err := gateway.GetTask(c, userID, taskID); err != nil {
+func IsExistsTask(userID int, taskID int) *myerror.MyError {
+	if _, err := gateway.GetTask(userID, taskID); err != nil {
 		return err
 	}
 	return nil
 }
 
-func CreateTask(c echo.Context, userID int, title string) *myerror.MyError {
-	if err := gateway.CreateTask(c, userID, title); err != nil {
+func CreateTask(userID int, title string) *myerror.MyError {
+	if err := gateway.CreateTask(userID, title); err != nil {
 		return err
 	}
 	return nil
 }
 
-func UpdateTask(c echo.Context, userID int, title string, taskID int) *myerror.MyError {
-	if err := gateway.UpdateTask(c, userID, title, taskID); err != nil {
+func UpdateTask(userID int, title string, taskID int) *myerror.MyError {
+	if err := gateway.UpdateTask(userID, title, taskID); err != nil {
 		return err
 	}
 	return nil
 }
 
-func DeleteTask(c echo.Context, userID int, taskID int) *myerror.MyError {
-	if err := gateway.DeleteTask(c, userID, taskID); err != nil {
+func DeleteTask(userID int, taskID int) *myerror.MyError {
+	if err := gateway.DeleteTask(userID, taskID); err != nil {
 		return err
 	}
 	return nil
