@@ -38,7 +38,7 @@ func CreateTask(c echo.Context) error {
 			return c.JSON(http.StatusBadRequest, err)
 		}
 	}
-	if err := interactor.IsExistsUser(c, task.UserID); err != nil {
+	if err := interactor.IsExistsUser(task.UserID); err != nil {
 		switch err.Code {
 		case 404:
 			return c.JSON(http.StatusNotFound, err)

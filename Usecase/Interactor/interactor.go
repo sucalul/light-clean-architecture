@@ -18,12 +18,12 @@ func GetUsers() ([]*entity.User, error) {
 	return users.GetUsers()
 }
 
-func GetUser(c echo.Context, userID int) (*entity.User, error) {
-	return users.GetUser(c, userID)
+func GetUser(userID int) (*entity.User, error) {
+	return users.GetUser(userID)
 }
 
-func IsExistsUser(c echo.Context, userID int) *myerror.MyError {
-	return users.IsExistsUser(c, userID)
+func IsExistsUser(userID int) *myerror.MyError {
+	return users.IsExistsUser(userID)
 }
 
 func GetTasks(c echo.Context) ([]*entity.Task, *myerror.MyError) {

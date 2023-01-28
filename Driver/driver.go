@@ -24,9 +24,6 @@ func Serve() {
 	gateway.DB = DB
 
 	// APIルーティング
-	// api := e.Group("/api")
-	// api.GET("/users", controller.GetUsers)
-	// api.GET("/users/:id", controller.GetUser)
 	// api.GET("/tasks", controller.GetTasks)
 	// api.POST("/tasks", controller.CreateTask)
 	// api.PUT("/tasks/:id", controller.UpdateTask)
@@ -37,7 +34,8 @@ func Serve() {
 	r.Use(middleware.Logger)
 
 	r.Route("/api", func(r chi.Router) {
-		r.Get("/users", controller.GetUsers) // GET /articles/search
+		r.Get("/users", controller.GetUsers)
+		r.Get("/users/{userID}", controller.GetUser)
 	})
 	http.ListenAndServe(":8080", r)
 }

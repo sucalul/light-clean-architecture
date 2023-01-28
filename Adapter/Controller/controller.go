@@ -15,8 +15,8 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 	users.GetUsers(w, r)
 }
 
-func GetUser(c echo.Context) error {
-	return users.GetUser(c)
+func GetUser(w http.ResponseWriter, r *http.Request) {
+	users.GetUser(w, r)
 }
 
 // tasks

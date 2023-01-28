@@ -24,8 +24,8 @@ func GetUsers() ([]*entity.User, error) {
 	return users.GetUsers(DB)
 }
 
-func GetUser(c echo.Context, userID int) (*entity.User, *myerror.MyError) {
-	return users.GetUser(c, DB, userID)
+func GetUser(userID int) (*entity.User, *myerror.MyError) {
+	return users.GetUser(DB, userID)
 }
 
 // tasks
