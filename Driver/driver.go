@@ -23,10 +23,6 @@ func Serve() {
 	// gateway DBにDBを渡す
 	gateway.DB = DB
 
-	// APIルーティング
-	// api.DELETE("/tasks/:id", controller.DeleteTask)
-	// create user
-
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
