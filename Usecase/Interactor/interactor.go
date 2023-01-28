@@ -26,8 +26,8 @@ func IsExistsUser(userID int) *myerror.MyError {
 	return users.IsExistsUser(userID)
 }
 
-func GetTasks(c echo.Context) ([]*entity.Task, *myerror.MyError) {
-	return tasks.GetTasks(c)
+func GetTasks() ([]*entity.Task, *myerror.MyError) {
+	return tasks.GetTasks()
 }
 
 func BindCreateUpdateTask(c echo.Context) (*entity.CreateTask, *myerror.MyError) {

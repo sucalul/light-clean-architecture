@@ -9,7 +9,7 @@ import (
 	entity "github.com/yuya0729/light-clean-architecture/Entity"
 )
 
-func GetTasks(c echo.Context, DB *sql.DB) ([]*entity.Task, *myerror.MyError) {
+func GetTasks(DB *sql.DB) ([]*entity.Task, *myerror.MyError) {
 	task := entity.Task{}
 	tasks := []*entity.Task{}
 	rows, err := DB.Query(`

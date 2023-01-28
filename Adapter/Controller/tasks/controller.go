@@ -1,6 +1,7 @@
 package tasks
 
 import (
+	"encoding/json"
 	"net/http"
 	"strconv"
 
@@ -19,15 +20,25 @@ import (
 // TODO:
 // errorの体系化
 
-func GetTasks(c echo.Context) error {
-	t, err := interactor.GetTasks(c)
+func GetTasks(w http.ResponseWriter, r *http.Request) {
+	code := 200
+	t, err := interactor.GetTasks()
 	if err != nil {
 		switch err.Code {
 		case 404:
-			return c.JSON(http.StatusNotFound, err)
+			code = 404
 		}
 	}
-	return c.JSON(http.StatusOK, t)
+
+	// レスポンスヘッダーの設定
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+
+	// ステータスコードを設定
+	w.WriteHeader(code)
+
+	// httpResponseの内容を書き込む
+	buf, _ := json.MarshalIndent(t, "", "    ")
+	_, _ = w.Write(buf)
 }
 
 func CreateTask(c echo.Context) error {

@@ -20,8 +20,8 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 }
 
 // tasks
-func GetTasks(c echo.Context) error {
-	return tasks.GetTasks(c)
+func GetTasks(w http.ResponseWriter, r *http.Request) {
+	tasks.GetTasks(w, r)
 }
 
 func CreateTask(c echo.Context) error {
